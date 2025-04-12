@@ -369,10 +369,10 @@
   resolved "https://registry.yarnpkg.com/@nolyfill/is-core-module/-/is-core-module-1.0.39.tgz#3dc35ba0f1e66b403c00b39344f870298ebb1c8e"
   integrity sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==
 
-"@pellegrinidev/piggy-ui@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@pellegrinidev/piggy-ui/-/piggy-ui-1.0.7.tgz#44353fa97ce4dbe8775aabbfa9afbcd57785a03e"
-  integrity sha512-VnKl3ujeUibNbM2MLnXuvWeddUWp3LGBVn2rWsH1i+wpgOrcVFLvLKMtnzyVPQyIi6h6NGm78VModrLLgblXOA==
+"@pellegrinidev/piggy-ui@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@pellegrinidev/piggy-ui/-/piggy-ui-1.0.14.tgz#931be98754bd9e026c99d3e1bca2923e24080ffc"
+  integrity sha512-EfVpg1H+REFOT8JSY9JeYBopBVhBfUtJvgLC9wJwGKWBc8tU/ysAxxkZQovnLmuvU+vKpXeGewi2A0qmfxKGUw==
   dependencies:
     "@radix-ui/react-alert-dialog" "^1.1.7"
     "@radix-ui/react-checkbox" "^1.1.4"
