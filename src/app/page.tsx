@@ -1,29 +1,14 @@
 'use client';
 
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, Button } from "@pellegrinidev/piggy-ui";
+import { Button } from "@pellegrinidev/piggy-ui";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="">
-        <Button>Teste</Button>
-
-        <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button>Deletar conta</Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Essa ação não pode ser desfeita. Isso excluirá sua conta permanentemente.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => console.debug("cancelled")}>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={() => console.debug("confirmed")}>Confirmar</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+    <div className="w-screen h-screen justify-center items-center flex flex-col">
+        <Link href="/auth/login">
+          <Button>Teste</Button>
+        </Link>
     </div>
   );
 }
