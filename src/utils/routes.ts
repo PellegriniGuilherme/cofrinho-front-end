@@ -8,6 +8,10 @@ export const routes = {
   },
   cofrinho: {
     home: "/cofrinho",
-    new: "/cofrinho/new",
+    category: {
+      list: "/cofrinho/category",
+      create: "/cofrinho/category/create",
+    },
+    extract: "/cofrinho/extract",
   }
 };

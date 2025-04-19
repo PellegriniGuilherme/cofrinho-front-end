@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "@pellegrinidev/piggy-ui/style.css";
 import "./globals.css";
 import Providers from "@/providers/QueryClientProvider";
 

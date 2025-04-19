@@ -14,7 +14,7 @@ interface LaravelValidationError<TFields extends FieldValues> {
 
 export function validateError<TFields extends FieldValues>(
   error: unknown,
-  setError: UseFormSetError<TFields>
+  setError?: UseFormSetError<TFields>
 ): void {
   if (
     typeof error !== 'object' ||
@@ -36,6 +36,9 @@ export function validateError<TFields extends FieldValues>(
       if (field === 'alert') continue;
       const messages = response.errors[field as Path<TFields>];
       if (messages && messages.length > 0) {
+        if(!setError) {
+          return ;
+        }
         setError(field as Path<TFields>, {
           type: 'manual',
           message: messages.join(' '),
@@ -45,6 +48,9 @@ export function validateError<TFields extends FieldValues>(
   }
 
   if (!response.validation && response.message) {
+    if(!setError) {
+      return ;
+    }
     setError('root' as Path<TFields>, {
       type: 'manual',
       message: response.message,

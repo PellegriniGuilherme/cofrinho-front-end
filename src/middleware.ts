@@ -18,3 +18,10 @@ export function middleware(request: NextRequest) {
 
   return NextResponse.next()
 }
+
+export const config = {
+  matcher: [
+    '/cofrinho/:path*',
+    '/auth/:path*',
+  ],
+}
