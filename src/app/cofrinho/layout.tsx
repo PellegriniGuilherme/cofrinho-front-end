@@ -157,7 +157,7 @@ const CofrinhoLayout: React.FC<{
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
-      <div className="p-4 bg-brand-50 flex h-full">
+      <div className="p-4 bg-brand-50 md:h-[calc(100vh-64px)] flex">
         <Card className="bg-white w-full h-full">
           <CardContent className="h-full">
             {children}
