@@ -88,7 +88,7 @@ const CofrinhoLayout: React.FC<{
         </div>
       }
     >
-      <SidebarProvider defaultOpen={true}>
+      <SidebarProvider>
         <Sidebar collapsible="icon">
           <SidebarHeader>
             <SidebarMenu>
