@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@pellegrinidev/piggy-ui";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { CurrencyTextInput, DateInput, SelectInput, SwitchInput, TextInput } from "../FormField/FormField";
 import { validateError } from "@/utils/validateError";
@@ -10,7 +10,7 @@ import { useCreateTransaction, useUpdateTransaction } from "@/hooks/useTransacti
 import { useCategories } from "@/hooks/useCategory";
 import { Category } from "@/api/services/categoryService";
 
-interface FormTransaction {
+export interface FormTransaction {
   category_id?: string;
   amount: number;
   description?: string;
@@ -35,6 +35,16 @@ export default function CreateTransaction({ children, initialValue }: { children
       type: initialValue?.type || 'expense',
     }
   });
+
+  useEffect(() => {
+    form.reset({
+      category_id: initialValue?.category?.id ? `${initialValue.category.id}` : undefined,
+      amount: initialValue?.amount || undefined,
+      description: initialValue?.description || '',
+      happened_at: initialValue?.happened_at || moment().format('YYYY-MM-DD'),
+      type: initialValue?.type || 'expense',
+    });
+  }, [initialValue]);
 
   const CreateTransaction = useCreateTransaction();
   const UpdateTransaction = useUpdateTransaction();

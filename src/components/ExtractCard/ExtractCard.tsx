@@ -15,12 +15,21 @@ import 'moment/locale/pt-br';
 
 moment.locale('pt-br');
 
-const ExtractCard = ({ transaction, showLine }: { transaction: Transaction, showLine: boolean }) => {
+interface ExtractCardProps {
+  transaction: Transaction;
+  showLine?: boolean;
+  onSelect?: (transaction: Transaction) => void;
+  isSelect?: boolean;
+}
+
+const ExtractCard = ({ transaction, showLine, onSelect, isSelect }: ExtractCardProps) => {
 
   const createRef = useRef<HTMLButtonElement>(null);
   const deleteRef = useRef<HTMLButtonElement>(null);
   const deleteTransaction = useDeleteTransaction();
   const showValues = useAccount((s) => s.showValues);
+
+  const hasSelect = !!onSelect;
 
   const handleDelete = async () => {
     await deleteTransaction.mutateAsync(transaction.id, {
@@ -62,7 +71,7 @@ const ExtractCard = ({ transaction, showLine }: { transaction: Transaction, show
         </AlertDialogContent>
       </AlertDialog>
 
-      <div className="w-full relative my-4">
+      <div className={`w-full relative my-4 rounded-lg px-2 py-3 transition-all ${isSelect && 'bg-brand-50'} ${hasSelect ? 'cursor-pointer hover:bg-brand-50' : ''}`} onClick={() => hasSelect && onSelect?.(transaction)}>
         <div className="flex gap-4 justify-start items-center">
           <div className="flex justify-center items-center">
             <span className={`w-12 h-12 flex justify-center items-center bg-neutral-100 rounded-full ${transaction.type === 'income' ? 'text-success-400' : 'text-danger-400'}`}>

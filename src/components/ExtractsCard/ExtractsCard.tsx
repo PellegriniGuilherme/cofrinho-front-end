@@ -14,9 +14,15 @@ import CreateTransaction from "../CreateTransaction/CreateTransaction";
 import { useTransactions } from "@/hooks/useTransaction";
 import ExtractCard from "../ExtractCard/ExtractCard";
 import { Transaction } from "@/api/services/transactionService";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function ExtractsCard() {
+interface ExtractsCardProps {
+  onSelect?: (transaction: Transaction) => void;
+  selected?: Transaction | null;
+  showHeader?: boolean;
+}
+
+export default function ExtractsCard({ onSelect, selected, showHeader = true }: ExtractsCardProps) {
   const {
     data,
     isLoading,
@@ -25,7 +31,7 @@ export default function ExtractsCard() {
     isFetchingNextPage,
   } = useTransactions();
 
-  const observerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
@@ -35,56 +41,71 @@ export default function ExtractsCard() {
   }, [data]);
 
   useEffect(() => {
-    if (!observerRef.current || !hasNextPage) return;
+    if (!selected || !transactions.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting && hasNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 }
-    );
+    const found = transactions.find((t) => t.id === selected.id);
 
-    observer.observe(observerRef.current);
+    if (!found) return;
+
+    onSelect?.(found);
+  }, [transactions]);
+
+  const handleScroll = useCallback(() => {
+    if (!containerRef.current || !hasNextPage || isFetchingNextPage) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+
+    if (scrollHeight - scrollTop <= clientHeight + 150) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (!container) return;
+
+    container.addEventListener("scroll", handleScroll);
 
     return () => {
-      if (observerRef.current) observer.unobserve(observerRef.current);
+      container.removeEventListener("scroll", handleScroll);
     };
-  }, [observerRef.current, hasNextPage, fetchNextPage]);
+  }, [handleScroll]);
 
   const showSkeleton = isLoading;
   const hasTransactions = !isLoading && transactions.length > 0;
 
   return (
     <Card className="border border-brand-100 flex h-full flex-col">
-      <CardHeader>
-        <div className="flex flex-row items-center justify-between">
-          <CardTitle>Extrato</CardTitle>
-          <Tooltip>
-            <CreateTransaction>
-              <TooltipTrigger asChild>
-                <Button className="rounded-full" size="icon">
-                  <Plus />
-                </Button>
-              </TooltipTrigger>
-            </CreateTransaction>
-            <TooltipContent>
-              <div className="flex flex-col gap-2">
-                <Heading size="sm" className="text-brand-500">
-                  Adicionar Transação
-                </Heading>
-                <p className="text-sm">
-                  Clique para adicionar uma nova transação
-                </p>
-              </div>
-            </TooltipContent>
-          </Tooltip>
-        </div>
-      </CardHeader>
-
-      <CardContent className="flex-1 overflow-y-auto">
+      {
+        showHeader && (
+          <CardHeader>
+            <div className="flex flex-row items-center justify-between">
+              <CardTitle>Extrato</CardTitle>
+              <Tooltip>
+                <CreateTransaction>
+                  <TooltipTrigger asChild>
+                    <Button className="rounded-full" size="icon">
+                      <Plus />
+                    </Button>
+                  </TooltipTrigger>
+                </CreateTransaction>
+                <TooltipContent>
+                  <div className="flex flex-col gap-2">
+                    <Heading size="sm" className="text-brand-500">
+                      Adicionar Transação
+                    </Heading>
+                    <p className="text-sm">
+                      Clique para adicionar uma nova transação
+                    </p>
+                  </div>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </CardHeader>
+        )
+      }
+      <CardContent className="flex-1 overflow-y-auto" ref={containerRef}>
         {showSkeleton && (
           <div className="flex items-center justify-center h-full">
             <LoaderIcon className="animate-spin text-brand-500" />
@@ -92,21 +113,15 @@ export default function ExtractsCard() {
         )}
 
         {hasTransactions &&
-          transactions.map((item, index) => {
-            const isLast = index === transactions.length - 1;
-
-            return (
-              <div
-                key={item.id}
-                ref={isLast ? observerRef : undefined}
-              >
-                <ExtractCard
-                  transaction={item}
-                  showLine={index !== transactions.length - 1}
-                />
-              </div>
-            );
-          })}
+          transactions.map((item, index) => (
+            <ExtractCard
+              key={item.id}
+              transaction={item}
+              showLine={index !== transactions.length - 1}
+              onSelect={onSelect}
+              isSelect={item.id == selected?.id}
+            />
+          ))}
 
         {isFetchingNextPage && (
           <div className="flex items-center justify-center py-4">

@@ -1,7 +1,7 @@
 import { ApiResponse } from "@/api/api";
 import { createTransaction, deleteTransaction, getTransactions, PaginatedData, Transaction, updateTransaction } from "@/api/services/transactionService";
+import { FormTransaction } from "@/components/CreateTransaction/CreateTransaction";
 import { InfiniteData, useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-
 
 export const useTransactions = () => {
   return useInfiniteQuery<
@@ -35,7 +35,7 @@ export const useCreateTransaction = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: Omit<Transaction, 'id' | 'category' | 'account' | 'type' >) => {
+    mutationFn: async (data: FormTransaction) => {
       const response = await createTransaction(data);
       return response;
     },
@@ -46,11 +46,13 @@ export const useCreateTransaction = () => {
   });
 }
 
+type UpdateTransactionPayload = FormTransaction & { id: number };
+
 export const useUpdateTransaction = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: Omit<Transaction, | 'category' | 'account' | 'type' >) => {
+    mutationFn: async (data: UpdateTransactionPayload) => {
       const response = await updateTransaction(data.id, data);
       return response;
     },

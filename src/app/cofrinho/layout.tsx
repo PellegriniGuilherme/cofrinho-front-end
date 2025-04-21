@@ -30,6 +30,7 @@ import {
 import { PiggyBank, ReceiptText, Tag } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo } from "react";
+import Link from "next/link";
 
 const CofrinhoLayout: React.FC<{
   children: React.ReactNode;
@@ -90,7 +91,7 @@ const CofrinhoLayout: React.FC<{
                 className="hover:bg-transparent cursor-default"
                 size='lg'
               >
-                <span className="flex items-center gap-2">
+                <Link href='/' className="flex items-center gap-2 select-none cursor-pointer">
                   <div className="flex aspect-square size-8 items-center justify-center">
                     <img 
                       src='/images/mascote/Logo.png' 
@@ -100,7 +101,7 @@ const CofrinhoLayout: React.FC<{
                   <Heading size='lg' className="text-brand-400">
                     Cofrinho
                   </Heading>
-                </span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

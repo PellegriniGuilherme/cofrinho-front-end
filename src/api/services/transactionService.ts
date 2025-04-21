@@ -1,3 +1,4 @@
+import { FormTransaction } from '@/components/CreateTransaction/CreateTransaction';
 import { api, ApiResponse } from '../api';
 import { Category } from './categoryService';
 
@@ -16,6 +17,8 @@ export interface Transaction {
   amount: number;
   description?: string;
   happened_at?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface PaginatedData<T> {
@@ -63,7 +66,7 @@ export const getBalance = async (): Promise<ApiResponse<DashboardSummary>> => {
   return response.data;
 }
 
-export const createTransaction = async (data: Omit<Transaction, 'id' | 'category' | 'account' | 'type' >) => {
+export const createTransaction = async (data: FormTransaction) => {
   try {
     const response = await api.post('/transactions', data);
     return response.data;
@@ -72,7 +75,7 @@ export const createTransaction = async (data: Omit<Transaction, 'id' | 'category
   }
 }
 
-export const updateTransaction = async (id: number, data: Omit<Transaction, 'id' | 'category' | 'account' | 'type' >) => {
+export const updateTransaction = async (id: number, data: FormTransaction) => {
   try {
     const response = await api.put(`/transactions/${id}`, data);
     return response.data;
