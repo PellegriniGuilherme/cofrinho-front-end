@@ -6,6 +6,9 @@ import Providers from "@/providers/QueryClientProvider";
 export const metadata: Metadata = {
   title: "Cofrinho",
   description: "Organize suas finanças de forma simples e prática",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -15,7 +18,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="en">
+    <html lang="pt-br">
       <body
         className='antialiased'
       >
