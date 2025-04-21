@@ -101,7 +101,7 @@ export default function CreateCategory({ children, initialValue }: { children: R
             type="submit"
             disabled={form.formState.isSubmitting}
           >
-            Confirm
+            Confirmar
           </Button>
         </DialogFooter>
       </DialogContent>

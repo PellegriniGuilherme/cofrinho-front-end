@@ -7,7 +7,7 @@ const NotFoundItems: React.FC<{ height?: boolean }> = ({ height = false }) => {
   return (
     <div className="flex flex-col h-full w-full items-center justify-center">
       <Heading className="text-brand-500 text-center mb-4" size='2xl'>
-        Parece ainda não existe nada aqui...
+        Ainda não existe nada aqui.
       </Heading>
       <img 
         src="/images/mascote/NotFound.png"

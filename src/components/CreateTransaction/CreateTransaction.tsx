@@ -125,7 +125,6 @@ export default function CreateTransaction({ children, initialValue }: { children
             label="Categoria"
             placeholder="Selecione uma categoria"
             options={categoriesOptions}
-            required
           />
           <TextInput
             name="description"
@@ -154,7 +153,7 @@ export default function CreateTransaction({ children, initialValue }: { children
             type="submit"
             disabled={form.formState.isSubmitting}
           >
-            Confirm
+            Confirmar
           </Button>
         </DialogFooter>
       </DialogContent>

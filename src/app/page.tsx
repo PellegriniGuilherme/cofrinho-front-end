@@ -77,16 +77,16 @@ export default function Home() {
         </div>
       </section>
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 w-full">
           <Heading size="3xl" className="text-center mb-4">
             Recursos do <span className="text-brand-500">Cofrinho</span>
           </Heading>
-          <Text className="text-center text-neutral-600 mb-12 max-w-2xl mx-auto">
+          <Text as='p' align="center" className="text-neutral-600 mb-12 max-w-2xl mx-auto">
             Descubra como o Cofrinho pode ajudar você a ter mais controle sobre suas finanças pessoais com ferramentas
             simples e eficientes.
           </Text>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
             <Card className="border-brand-100">
               <CardContent className="pt-6">
                 <div className="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center mb-4">

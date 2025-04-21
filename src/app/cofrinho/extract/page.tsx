@@ -40,7 +40,7 @@ const ExtractPage = () => {
     <div className="flex flex-col h-full">
       <div className='mb-4 flex flex-row items-center justify-between'>
         <Heading size='3xl' className='mb-4 text-brand-500'>
-          Extrado detalhado
+          Extrato detalhado
         </Heading>
         <div className="flex flex-row items-center gap-2">
           <Tooltip>
@@ -185,7 +185,7 @@ const ExtractPage = () => {
                 <Heading size="2xl" className="text-brand-500 mb-5">
                   Selecione uma transação para ver os detalhes
                 </Heading>
-                <img src="/images/mascote/Dashboard.png" alt="Empty" className="w-1/2" />
+                <img src="/images/mascote/Dashboard.png" alt="Empty" className="w-1/4" />
               </div>
             )
           }
