@@ -127,8 +127,8 @@ const CurrencyInput = ({ value, onChange, ...props }: any) => {
       thousandSeparator="."
       decimalSeparator=","
       decimalScale={2}
+      allowNegative={false}
       fixedDecimalScale
-      allowNegative
       {...props}
     />
   );
