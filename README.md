@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cofrinho · Front-end
 
-## Getting Started
+Bem-vindo ao Cofrinho! 💰  
+Este é o front-end da aplicação Cofrinho, uma plataforma de controle financeiro pessoal com uma interface amigável e moderna.
 
-First, run the development server:
+> ⚙️ Veja também o [repositório do back-end (Laravel)](https://github.com/PellegriniGuilherme/cofrinho-back-end)
+> 🐽 Veja também o [repositório do piggy-ui](https://github.com/PellegriniGuilherme/piggy-ui)
+
+---
+
+## ✨ Tecnologias Utilizadas
+
+- [Next.js 15](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Zustand](https://zustand-demo.pmnd.rs/)
+- [@tanstack/react-query](https://tanstack.com/query/latest)
+- [Piggy UI](https://github.com/PellegriniGuilherme/piggy-ui)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [i18next](https://www.i18next.com/)
+
+---
+
+## 🚀 Instalação
+
+### 1. Clonar o repositório
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/PellegriniGuilherme/cofrinho-front-end.git
+cd cofrinho-front-end
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Instalar as dependências
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Configurar as variáveis de ambiente
 
-## Learn More
+Crie um arquivo `.env.local` com base no exemplo:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cp .env.example .env.local
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Edite o arquivo `.env.local` para apontar para a API do Laravel:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+NEXT_PUBLIC_API_URL=http://localhost
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ⚙️ Back-end (Laravel + Sail)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O back-end está disponível em:  
+🔗 [https://github.com/PellegriniGuilherme/cofrinho-back-end](https://github.com/PellegriniGuilherme/cofrinho-back-end)
+
+### Instalação do back-end com Laravel Sail
+
+```bash
+git clone https://github.com/PellegriniGuilherme/cofrinho-back-end.git
+cd cofrinho-back-end
+
+cp .env.example .env
+
+./vendor/bin/sail up -d --build
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan migrate
+```
+
+> 🐳 Certifique-se de que você tenha Docker instalado para usar o Laravel Sail.
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+cofrinho-front-end/
+├── public/                # Arquivos públicos
+├── src/
+│   ├── api/               # Serviços de API
+│   ├── components/        # Componentes reutilizáveis
+│   ├── hooks/             # Custom hooks
+│   ├── pages/             # Páginas da aplicação
+│   ├── stores/            # Zustand stores
+│   ├── translations/      # Arquivos i18n
+│   └── utils/             # Funções utilitárias
+├── .env.local             # Variáveis de ambiente
+└── tailwind.config.ts     # Configuração do Tailwind
+```
+
+---
+
+## 📜 Scripts Úteis
+
+```bash
+yarn dev        # Inicia o servidor de desenvolvimento
+yarn build      # Compila a aplicação para produção
+yarn lint       # Executa o linter
+```
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou pull request.
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.

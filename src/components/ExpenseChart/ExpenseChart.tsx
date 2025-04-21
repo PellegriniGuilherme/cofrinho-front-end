@@ -5,6 +5,7 @@ import {
   Recharts,
 } from '@pellegrinidev/piggy-ui'
 import { LoaderIcon } from 'lucide-react'
+import NotFoundItems from '../NotFoundItems/NotFoundItems'
 
 interface ChartByCategoryProps {
   data: {
@@ -31,7 +32,13 @@ export default function ChartByCategory({
     )
   }
 
-  if (!data?.length || !config) return null
+  if (!data?.length || !config) {
+    return (
+      <div className='h-96 w-full aspect-auto'>
+        <NotFoundItems height />
+      </div>
+    )
+  }
 
   return (
     <ChartContainer config={config} id={`bar-chart-${chartType}`} className="h-full w-full aspect-auto">

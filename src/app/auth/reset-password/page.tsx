@@ -21,7 +21,7 @@ export interface ResetFormValues {
   token: string;
 }
 
-const ResetPassowrdPage: React.FC = () => {
+const ResetPasswordPage: React.FC = () => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -127,4 +127,4 @@ const ResetPassowrdPage: React.FC = () => {
   );
 };
 
-export default ResetPassowrdPage;
+export default ResetPasswordPage;

@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import {  Card as BaseCard, CardContent } from '@pellegrinidev/piggy-ui';
-import React from 'react';
+import React, { Suspense } from 'react';
+import { LoaderIcon } from 'lucide-react';
 
 const Card = motion(BaseCard);
 
@@ -13,17 +14,25 @@ export default function AuthLayout({
 }>) {
 
   return (
-    <div className='bg-brand-50 h-screen w-screen flex items-center justify-center'>
-      <Card 
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className='bg-white container h-3/4 flex'
-      >
-        <CardContent className='h-full flex flex-col lg:flex-row py-16 px-3 md:px-6'>
-          {children}
-        </CardContent>
-      </Card>
-    </div>
+    <Suspense
+      fallback={
+        <div className='bg-brand-50 h-screen w-screen flex items-center justify-center'>
+          <LoaderIcon className='animate-spin text-brand-500' />
+        </div>
+      }
+    >
+      <div className='bg-brand-50 h-screen w-screen flex items-center justify-center'>
+        <Card 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className='bg-white container h-3/4 flex'
+        >
+          <CardContent className='h-full flex flex-col lg:flex-row py-16 px-3 md:px-6'>
+            {children}
+          </CardContent>
+        </Card>
+      </div>
+    </Suspense>
   );
 };

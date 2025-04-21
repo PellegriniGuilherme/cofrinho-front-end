@@ -15,6 +15,7 @@ import { useTransactions } from "@/hooks/useTransaction";
 import ExtractCard from "../ExtractCard/ExtractCard";
 import { Transaction } from "@/api/services/transactionService";
 import { useCallback, useEffect, useRef, useState } from "react";
+import NotFoundItems from "../NotFoundItems/NotFoundItems";
 
 interface ExtractsCardProps {
   onSelect?: (transaction: Transaction) => void;
@@ -127,6 +128,10 @@ export default function ExtractsCard({ onSelect, selected, showHeader = true }: 
           <div className="flex items-center justify-center py-4">
             <LoaderIcon className="animate-spin text-brand-500" />
           </div>
+        )}
+
+        {!showSkeleton && !hasTransactions && (
+          <NotFoundItems />
         )}
       </CardContent>
     </Card>
