@@ -38,7 +38,7 @@ const CofrinhoLayout: React.FC<{
   const setUser = useAuthStore((s) => s.setUser);
   const clearUser = useAuthStore((s) => s.clearUser);
   const user = useAuthStore((s) => s.user);
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const { data, error } = useSession();
   const logout = useLogoutDispatch();
@@ -125,12 +125,12 @@ const CofrinhoLayout: React.FC<{
                           isActive={item.href === pathname}
                           size='lg'
                         >
-                          <a href={item.href} className="flex items-center gap-2">
+                          <Link href={item.href} className="flex items-center gap-2">
                             <div className="flex aspect-square size-8 items-center justify-center">
                               <item.icon />
                             </div>
                             <span>{item.name}</span>
-                          </a>
+                          </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))
